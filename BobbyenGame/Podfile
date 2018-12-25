@@ -1,0 +1,14 @@
+platform :ios, ‘8.0‘
+
+target "BobbyenGame" do
+use_frameworks!
+
+pod 'AFNetworking'
+pod 'WebViewJavascriptBridge'
+pod 'SSZipArchive'
+pod 'WMPlayer' 
+pod 'SDWebImage'
+pod 'Masonry'
+pod 'CLPlayer'
+
+end

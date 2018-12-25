@@ -1,0 +1,436 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3AFFD6985273E896B49E326A /* Pods_BobbyenGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A90971050EF4F70D4D43CDA /* Pods_BobbyenGame.framework */; };
+		4E07721421CCCA5E005796EE /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E07721321CCCA5E005796EE /* VideoViewController.m */; };
+		4E0EA9B121CB329300DFFC59 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9B021CB329300DFFC59 /* AppDelegate.m */; };
+		4E0EA9B921CB329400DFFC59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E0EA9B821CB329400DFFC59 /* Assets.xcassets */; };
+		4E0EA9BF21CB329400DFFC59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9BE21CB329400DFFC59 /* main.m */; };
+		4E0EA9C821CB38B700DFFC59 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9C721CB38B700DFFC59 /* RootViewController.m */; };
+		4E0EA9CB21CB3B5D00DFFC59 /* DownLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9CA21CB3B5D00DFFC59 /* DownLoadViewController.m */; };
+		4E0EA9D121CB4B1400DFFC59 /* ArchiveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9D021CB4B1400DFFC59 /* ArchiveManager.m */; };
+		4E54338F21D0C32600639E4F /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E54338E21D0C32600639E4F /* GameViewController.m */; };
+		4E54339221D0FC8C00639E4F /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E54339121D0FC8C00639E4F /* Tool.m */; };
+		4E65D69521D228FA006B9B37 /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = 4E65D69421D228FA006B9B37 /* ExampleApp.html */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A90971050EF4F70D4D43CDA /* Pods_BobbyenGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BobbyenGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E07721221CCCA5E005796EE /* VideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		4E07721321CCCA5E005796EE /* VideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		4E0EA9AC21CB329300DFFC59 /* BobbyenGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BobbyenGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E0EA9AF21CB329300DFFC59 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4E0EA9B021CB329300DFFC59 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4E0EA9B821CB329400DFFC59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4E0EA9BD21CB329400DFFC59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E0EA9BE21CB329400DFFC59 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4E0EA9C521CB345A00DFFC59 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		4E0EA9C621CB38B700DFFC59 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		4E0EA9C721CB38B700DFFC59 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		4E0EA9C921CB3B5D00DFFC59 /* DownLoadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownLoadViewController.h; sourceTree = "<group>"; };
+		4E0EA9CA21CB3B5D00DFFC59 /* DownLoadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoadViewController.m; sourceTree = "<group>"; };
+		4E0EA9CF21CB4B1400DFFC59 /* ArchiveManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArchiveManager.h; sourceTree = "<group>"; };
+		4E0EA9D021CB4B1400DFFC59 /* ArchiveManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArchiveManager.m; sourceTree = "<group>"; };
+		4E54338D21D0C32600639E4F /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		4E54338E21D0C32600639E4F /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		4E54339021D0FC8C00639E4F /* Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
+		4E54339121D0FC8C00639E4F /* Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
+		4E65D69421D228FA006B9B37 /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
+		776C165B62D00D16093D2604 /* Pods-BobbyenGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobbyenGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BobbyenGame/Pods-BobbyenGame.debug.xcconfig"; sourceTree = "<group>"; };
+		AA69CBD69AAB5E267C7E8E6F /* Pods-BobbyenGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobbyenGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-BobbyenGame/Pods-BobbyenGame.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4E0EA9A921CB329300DFFC59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AFFD6985273E896B49E326A /* Pods_BobbyenGame.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1FC67B7EF9D4ABCDBBDED8C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A90971050EF4F70D4D43CDA /* Pods_BobbyenGame.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4E0EA9A321CB329300DFFC59 = {
+			isa = PBXGroup;
+			children = (
+				4E0EA9AE21CB329300DFFC59 /* BobbyenGame */,
+				4E0EA9AD21CB329300DFFC59 /* Products */,
+				E4A71ACA8E112379B98C94EA /* Pods */,
+				1FC67B7EF9D4ABCDBBDED8C5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4E0EA9AD21CB329300DFFC59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E0EA9AC21CB329300DFFC59 /* BobbyenGame.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4E0EA9AE21CB329300DFFC59 /* BobbyenGame */ = {
+			isa = PBXGroup;
+			children = (
+				4E0EA9AF21CB329300DFFC59 /* AppDelegate.h */,
+				4E0EA9B021CB329300DFFC59 /* AppDelegate.m */,
+				4E0EA9CF21CB4B1400DFFC59 /* ArchiveManager.h */,
+				4E0EA9D021CB4B1400DFFC59 /* ArchiveManager.m */,
+				4E0EA9C621CB38B700DFFC59 /* RootViewController.h */,
+				4E0EA9C721CB38B700DFFC59 /* RootViewController.m */,
+				4E54338D21D0C32600639E4F /* GameViewController.h */,
+				4E54338E21D0C32600639E4F /* GameViewController.m */,
+				4E0EA9C921CB3B5D00DFFC59 /* DownLoadViewController.h */,
+				4E0EA9CA21CB3B5D00DFFC59 /* DownLoadViewController.m */,
+				4E07721221CCCA5E005796EE /* VideoViewController.h */,
+				4E07721321CCCA5E005796EE /* VideoViewController.m */,
+				4E54339021D0FC8C00639E4F /* Tool.h */,
+				4E54339121D0FC8C00639E4F /* Tool.m */,
+				4E65D69421D228FA006B9B37 /* ExampleApp.html */,
+				4E0EA9B821CB329400DFFC59 /* Assets.xcassets */,
+				4E0EA9BD21CB329400DFFC59 /* Info.plist */,
+				4E0EA9BE21CB329400DFFC59 /* main.m */,
+				4E0EA9C521CB345A00DFFC59 /* PrefixHeader.pch */,
+			);
+			path = BobbyenGame;
+			sourceTree = "<group>";
+		};
+		E4A71ACA8E112379B98C94EA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				776C165B62D00D16093D2604 /* Pods-BobbyenGame.debug.xcconfig */,
+				AA69CBD69AAB5E267C7E8E6F /* Pods-BobbyenGame.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4E0EA9AB21CB329300DFFC59 /* BobbyenGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E0EA9C221CB329400DFFC59 /* Build configuration list for PBXNativeTarget "BobbyenGame" */;
+			buildPhases = (
+				CF87168A30D7AA070D94A69A /* [CP] Check Pods Manifest.lock */,
+				4E0EA9A821CB329300DFFC59 /* Sources */,
+				4E0EA9A921CB329300DFFC59 /* Frameworks */,
+				4E0EA9AA21CB329300DFFC59 /* Resources */,
+				576067F5AB83DDEDB090E782 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BobbyenGame;
+			productName = BobbyenGame;
+			productReference = 4E0EA9AC21CB329300DFFC59 /* BobbyenGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4E0EA9A421CB329300DFFC59 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "iOS-Mac";
+				TargetAttributes = {
+					4E0EA9AB21CB329300DFFC59 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 4E0EA9A721CB329300DFFC59 /* Build configuration list for PBXProject "BobbyenGame" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4E0EA9A321CB329300DFFC59;
+			productRefGroup = 4E0EA9AD21CB329300DFFC59 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4E0EA9AB21CB329300DFFC59 /* BobbyenGame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4E0EA9AA21CB329300DFFC59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E0EA9B921CB329400DFFC59 /* Assets.xcassets in Resources */,
+				4E65D69521D228FA006B9B37 /* ExampleApp.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		576067F5AB83DDEDB090E782 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BobbyenGame/Pods-BobbyenGame-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CLPlayer/CLPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
+				"${BUILT_PRODUCTS_DIR}/WMPlayer/WMPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CLPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewJavascriptBridge.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BobbyenGame/Pods-BobbyenGame-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF87168A30D7AA070D94A69A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BobbyenGame-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E0EA9A821CB329300DFFC59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E0EA9BF21CB329400DFFC59 /* main.m in Sources */,
+				4E0EA9C821CB38B700DFFC59 /* RootViewController.m in Sources */,
+				4E54338F21D0C32600639E4F /* GameViewController.m in Sources */,
+				4E07721421CCCA5E005796EE /* VideoViewController.m in Sources */,
+				4E0EA9D121CB4B1400DFFC59 /* ArchiveManager.m in Sources */,
+				4E0EA9CB21CB3B5D00DFFC59 /* DownLoadViewController.m in Sources */,
+				4E0EA9B121CB329300DFFC59 /* AppDelegate.m in Sources */,
+				4E54339221D0FC8C00639E4F /* Tool.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4E0EA9C021CB329400DFFC59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4E0EA9C121CB329400DFFC59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4E0EA9C321CB329400DFFC59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 776C165B62D00D16093D2604 /* Pods-BobbyenGame.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S24KMPBJ78;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/BobbyenGame/PrefixHeader.pch";
+				INFOPLIST_FILE = BobbyenGame/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BobbyenGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4E0EA9C421CB329400DFFC59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA69CBD69AAB5E267C7E8E6F /* Pods-BobbyenGame.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S24KMPBJ78;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/BobbyenGame/PrefixHeader.pch";
+				INFOPLIST_FILE = BobbyenGame/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BobbyenGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4E0EA9A721CB329300DFFC59 /* Build configuration list for PBXProject "BobbyenGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E0EA9C021CB329400DFFC59 /* Debug */,
+				4E0EA9C121CB329400DFFC59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E0EA9C221CB329400DFFC59 /* Build configuration list for PBXNativeTarget "BobbyenGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E0EA9C321CB329400DFFC59 /* Debug */,
+				4E0EA9C421CB329400DFFC59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4E0EA9A421CB329300DFFC59 /* Project object */;
+}
