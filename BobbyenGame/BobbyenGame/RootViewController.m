@@ -65,6 +65,7 @@
     else if (indexPath.row==4){
         cell.textLabel.text = @"视频播放功能";
     }
+
     return cell;
 }
 
@@ -86,15 +87,26 @@
 
     }
     else if (indexPath.row==4) {
-        VideoViewController *vc=[VideoViewController new];
-        [self.navigationController presentViewController:vc animated:YES completion:nil];
+        VideoViewController *vc=[[VideoViewController alloc]init];
+        [self presentViewController:vc animated:YES completion:nil];
     }
-
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
+
+
+//支持旋转
+-(BOOL)shouldAutorotate{
+    return YES;
+}
+//支持的方向,支持竖屏
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+
 
 
 /*

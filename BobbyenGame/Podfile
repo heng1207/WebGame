@@ -10,5 +10,6 @@ pod 'WMPlayer'
 pod 'SDWebImage'
 pod 'Masonry'
 pod 'CLPlayer'
+pod 'DeviceUtil'
 
 end

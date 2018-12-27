@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "409CEC8CF9C1C9A578D5C6161A031FEC"
+               BlueprintIdentifier = "2F87BAE89E788C0418374DFBF301A99B"
                BlueprintName = "WMPlayer"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "WMPlayer.framework">

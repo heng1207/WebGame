@@ -11,7 +11,7 @@
 
 @interface VideoViewController ()<WMPlayerDelegate>
 @property(nonatomic,strong) WMPlayer  *wmPlayer;
-@property(nonatomic,assign) NSInteger fullscreen;
+@property(nonatomic,assign) BOOL fullscreen;
 
 @property (strong, nonatomic)UISlider *avSlider;//用来现实视频的播放进度，并且通过它来控制视频的快进快退。
 @end
@@ -21,6 +21,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = YES;
+    [self creatVideoUI];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -31,7 +32,6 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor grayColor];
     
-    [self creatVideoUI];
 //    [self customPlayer];
 //    [self creatCLPlayer];
     // Do any additional setup after loading the view.
@@ -49,19 +49,21 @@
     [self.view addSubview:wmPlayer];
     wmPlayer.backBtnStyle = BackBtnStylePop;
     [wmPlayer play];
-    self.wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
-    self.wmPlayer.frame = CGRectMake(30, 50, SCREEN_WIDTH-60, SCREEN_HEIGHT-100);
+//    self.wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
+    self.wmPlayer.frame = CGRectMake(0, 0,  SCREEN_WIDTH, SCREEN_HEIGHT);
+    NSLog(@"%f---%f",SCREEN_WIDTH,SCREEN_HEIGHT);
 }
 //点击全屏按钮代理方法
 -(void)wmplayer:(WMPlayer *)wmplayer clickedFullScreenButton:(UIButton *)fullScreenBtn{
     self.fullscreen = !self.fullscreen;
     if (self.fullscreen) {
-         self.wmPlayer.frame = CGRectMake(30, 50, SCREEN_WIDTH-60, SCREEN_HEIGHT-100);
-    }
-    else{
         self.wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
-    
+    else{
+        self.wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT-100);
+    }
+
+    NSLog(@"%f---%f",SCREEN_WIDTH,SCREEN_HEIGHT);
     
 }
 //点击关闭按钮代理方法
@@ -102,6 +104,22 @@
     //播放
     [playerView playVideo];
 }
+
+
+//支持旋转
+-(BOOL)shouldAutorotate{
+    return YES;
+}
+//支持的方向,只支持横屏
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+//一开始的方向  很重要
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationLandscapeLeft;
+}
+
+
 
 /*
 #pragma mark - Navigation

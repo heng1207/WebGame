@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - CLPlayer (1.2.7):
     - Masonry
+  - DeviceUtil (5.0.0)
   - Masonry (1.1.0)
   - SDWebImage (4.4.3):
     - SDWebImage/Core (= 4.4.3)
@@ -28,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - CLPlayer
+  - DeviceUtil
   - Masonry
   - SDWebImage
   - SSZipArchive
@@ -38,6 +40,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - CLPlayer
+    - DeviceUtil
     - Masonry
     - SDWebImage
     - SSZipArchive
@@ -47,12 +50,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   CLPlayer: 70b060f49a319b7dbc7f69ed8cd1f5a1d4675901
+  DeviceUtil: effb5fd6d301a1bd42e0ac367b3391696651431e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
   WMPlayer: a914f80ed5dca7cd9e3a94ec07a2b02eec8c15c0
 
-PODFILE CHECKSUM: 371fd0710f9d04d0465f847a726e565c2fe09166
+PODFILE CHECKSUM: 280ba0889a6e634e795a89f94a4cef2b611bfc40
 
 COCOAPODS: 1.5.3
