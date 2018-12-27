@@ -18,6 +18,8 @@
 @property(nonatomic,strong) NSMutableArray *logDatas;
 @property(nonatomic,strong) WMPlayer  *wmPlayer;
 @property(nonatomic,strong) WVJBResponseCallback responseCallback;
+
+@property(nonatomic,strong)UITextView *titleTV;
 @end
 
 @implementation GameViewController
@@ -43,7 +45,7 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     [self initWKWebview];
-    self.logDatas = [NSMutableArray array];
+    self.logDatas = [NSMutableArray arrayWithCapacity:100];
     [self creatLogTabview];
     
     [self requestScriptResource];
@@ -58,15 +60,14 @@
     // 初始化一个 WKWebViewConfiguration 对象用于配置 WKWebView
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     configuration.userContentController = userContentController;
+    configuration.mediaPlaybackRequiresUserAction = false;
+    
     
     WKPreferences *preferences = [WKPreferences new];
     [preferences setValue:@(true) forKey:@"allowFileAccessFromFileURLs"];
     preferences.javaScriptCanOpenWindowsAutomatically = YES;
-    
     //preferences.minimumFontSize = 20.0;
     configuration.preferences = preferences;
-    configuration.mediaPlaybackRequiresUserAction = false;
-
     
     WKWebView *webView =[[WKWebView alloc]initWithFrame:[UIScreen mainScreen].bounds configuration:configuration];
     self.webview = webView;
@@ -142,9 +143,22 @@
         }
         
         else if ([dataDict[@"methodName"] isEqualToString:@"printLog"]){//Log日志输出
-            NSLog(@"%@",dataDict[@"logMsg"]);
+            NSLog(@"Log日志输出----%@",dataDict[@"logMsg"]);
             [weakSelf.logDatas addObject:dataDict[@"logMsg"]];
-            [weakSelf.logTableView reloadData];
+//            [weakSelf.logTableView reloadData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *newStr =  [weakSelf.logDatas componentsJoinedByString:@"\n"];//#为分隔符
+                NSLog(@"-----%lu",(unsigned long)[newStr length]);
+                if ([newStr length]>30000) {
+                    weakSelf.titleTV.text = [newStr substringFromIndex:([newStr length] - 30000)];
+                }
+                else{
+                    weakSelf.titleTV.text = newStr;
+                }
+                
+            });
+            
         }
 
         else if ([dataDict[@"methodName"] isEqualToString:@"getUserInfo"]){//获取用户信息
@@ -158,7 +172,7 @@
         }
 
         else if ([dataDict[@"methodName"] isEqualToString:@"exitMiniGame"]){//退出游戏
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         
         else if ([dataDict[@"methodName"] isEqualToString:@"createVideo"]){//视频创建
@@ -167,12 +181,12 @@
             model.videoURL = [NSURL URLWithString:dataDict[@"url"]];
             WMPlayer *wmPlayer = [WMPlayer playerWithModel:model];
             wmPlayer.isFullscreen = YES;
-            wmPlayer.delegate = self;
-            self.wmPlayer = wmPlayer;
-            [self.view addSubview:wmPlayer];
+            wmPlayer.delegate = weakSelf;
+            weakSelf.wmPlayer = wmPlayer;
+            [weakSelf.view addSubview:wmPlayer];
             wmPlayer.backBtnStyle = BackBtnStyleNone;
-            self.wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
-            self.wmPlayer.frame = CGRectMake([dataDict[@"y"] floatValue], [dataDict[@"x"] floatValue], [dataDict[@"height"] floatValue], [dataDict[@"width"] floatValue]);
+            weakSelf.wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
+            weakSelf.wmPlayer.frame = CGRectMake([dataDict[@"y"] floatValue], [dataDict[@"x"] floatValue], [dataDict[@"height"] floatValue], [dataDict[@"width"] floatValue]);
             
             
             NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
@@ -184,16 +198,19 @@
         }
         
         else if ([dataDict[@"methodName"] isEqualToString:@"playVideo"]){//视频播放
-            [self.wmPlayer play];
+            [weakSelf.wmPlayer play];
             
         }
         
         else if ([dataDict[@"methodName"] isEqualToString:@"onEndedVideo"]){//移除视频控件
-            [self.wmPlayer pause];
-            [self.wmPlayer removeFromSuperview];
+            [weakSelf.wmPlayer pause];
+            [weakSelf.wmPlayer removeFromSuperview];
+            weakSelf.wmPlayer = nil;
+            
         }
         
 
+       
     }];
     
 }
@@ -260,21 +277,31 @@
 //}
 
 -(void)creatLogTabview{
-    UITableView *logTableView =[[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
-    self.logTableView = logTableView;
-    [self.view addSubview:logTableView];
-    logTableView.delegate = self;
-    logTableView.dataSource = self;
-    logTableView.transform = CGAffineTransformMakeRotation(M_PI_2);
-    logTableView.frame = CGRectMake(0, SCREEN_HEIGHT*0.25, SCREEN_WIDTH, SCREEN_HEIGHT*0.75);
-    logTableView.hidden = YES;
-
-    [logTableView registerClass:[LogCell class] forCellReuseIdentifier:@"LogCell"];
-
-    //点击手势
-    UITapGestureRecognizer *logTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clearLogTapChange:)];
-    logTap.delegate = self;
-    [logTableView addGestureRecognizer:logTap];
+//    UITableView *logTableView =[[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+//    self.logTableView = logTableView;
+//    [self.view addSubview:logTableView];
+//    logTableView.delegate = self;
+//    logTableView.dataSource = self;
+//    logTableView.transform = CGAffineTransformMakeRotation(M_PI_2);
+//    logTableView.frame = CGRectMake(0, SCREEN_HEIGHT*0.25, SCREEN_WIDTH, SCREEN_HEIGHT*0.75);
+//    logTableView.hidden = YES;
+//
+//    [logTableView registerClass:[LogCell class] forCellReuseIdentifier:@"LogCell"];
+//
+//    //点击手势
+//    UITapGestureRecognizer *logTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clearLogTapChange:)];
+//    logTap.delegate = self;
+//    [logTableView addGestureRecognizer:logTap];
+    
+    
+    UITextView *titleTV =[UITextView new];
+    self.titleTV = titleTV;
+    titleTV.transform = CGAffineTransformMakeRotation(M_PI_2);
+    titleTV.frame = CGRectMake(0, SCREEN_HEIGHT*0.25, SCREEN_WIDTH, SCREEN_HEIGHT*0.75);
+    [self.view addSubview:titleTV];
+    titleTV.font = [UIFont systemFontOfSize:14];
+    titleTV.textColor =[UIColor blueColor];
+    titleTV.hidden = YES;
 
 }
 #pragma mark TableViewDelegate && TableViewDataSource
@@ -286,7 +313,10 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     LogCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LogCell" forIndexPath:indexPath];
-    cell.titleLab.text = self.logDatas[indexPath.row];
+    NSString *str = self.logDatas[indexPath.section];
+    NSLog(@"%lu",(unsigned long)[str length]);
+    cell.titleLab.text = str;
+//    [str substringToIndex:1000];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -305,7 +335,10 @@
     return YES;
 }
 -(void)logClick:(UIButton*)btn{
-    self.logTableView.hidden = !self.logTableView.hidden;
+//    self.logTableView.hidden = !self.logTableView.hidden;
+    
+    self.titleTV.hidden = !self.titleTV.hidden;
+
 }
 -(void)clearLogTapChange:(UIRotationGestureRecognizer *)sender{
     [self.logDatas removeAllObjects];
@@ -326,6 +359,7 @@
 -(void)wmplayerFailedPlay:(WMPlayer *)wmplayer WMPlayerStatus:(WMPlayerState)state{
     [self.wmPlayer pause];
     [self.wmPlayer removeFromSuperview];
+    self.wmPlayer = nil;
     
     NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
     returnDict[@"status"] = @"fail";
@@ -337,17 +371,19 @@
 -(void)wmplayerFinishedPlay:(WMPlayer *)wmplayer{
     [self.wmPlayer pause];
     [self.wmPlayer removeFromSuperview];
+    self.wmPlayer = nil;
     
     NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
     returnDict[@"status"] = @"success";
     returnDict[@"errorMsg"] = @"播放完成";
     returnDict[@"type"] = @"onCompleteVideo";
     self.responseCallback([Tool dictionaryToJson:returnDict]);
+    
 }
 
 
 -(void)dealloc{
-    NSLog(@"%@",self);
+    NSLog(@"页面释放了---%@",self);
 }
 
 @end

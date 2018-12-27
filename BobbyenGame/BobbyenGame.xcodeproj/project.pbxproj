@@ -8,24 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		3AFFD6985273E896B49E326A /* Pods_BobbyenGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A90971050EF4F70D4D43CDA /* Pods_BobbyenGame.framework */; };
-		4E07721421CCCA5E005796EE /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E07721321CCCA5E005796EE /* VideoViewController.m */; };
 		4E0EA9B121CB329300DFFC59 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9B021CB329300DFFC59 /* AppDelegate.m */; };
 		4E0EA9B921CB329400DFFC59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E0EA9B821CB329400DFFC59 /* Assets.xcassets */; };
 		4E0EA9BF21CB329400DFFC59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9BE21CB329400DFFC59 /* main.m */; };
 		4E0EA9C821CB38B700DFFC59 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9C721CB38B700DFFC59 /* RootViewController.m */; };
-		4E0EA9CB21CB3B5D00DFFC59 /* DownLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9CA21CB3B5D00DFFC59 /* DownLoadViewController.m */; };
 		4E0EA9D121CB4B1400DFFC59 /* ArchiveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EA9D021CB4B1400DFFC59 /* ArchiveManager.m */; };
 		4E2B608B21D35F9C00930334 /* LogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2B608A21D35F9C00930334 /* LogCell.m */; };
 		4E2B608E21D36F1D00930334 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2B608D21D36F1D00930334 /* MainNavigationController.m */; };
 		4E54338F21D0C32600639E4F /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E54338E21D0C32600639E4F /* GameViewController.m */; };
 		4E54339221D0FC8C00639E4F /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E54339121D0FC8C00639E4F /* Tool.m */; };
 		4E65D69521D228FA006B9B37 /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = 4E65D69421D228FA006B9B37 /* ExampleApp.html */; };
+		4EC559AE21D4E18D00C33161 /* DownLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC559AB21D4E18D00C33161 /* DownLoadViewController.m */; };
+		4EC559AF21D4E18D00C33161 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC559AD21D4E18D00C33161 /* VideoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1A90971050EF4F70D4D43CDA /* Pods_BobbyenGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BobbyenGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E07721221CCCA5E005796EE /* VideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
-		4E07721321CCCA5E005796EE /* VideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		4E0EA9AC21CB329300DFFC59 /* BobbyenGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BobbyenGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0EA9AF21CB329300DFFC59 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4E0EA9B021CB329300DFFC59 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -35,8 +33,6 @@
 		4E0EA9C521CB345A00DFFC59 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		4E0EA9C621CB38B700DFFC59 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		4E0EA9C721CB38B700DFFC59 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		4E0EA9C921CB3B5D00DFFC59 /* DownLoadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownLoadViewController.h; sourceTree = "<group>"; };
-		4E0EA9CA21CB3B5D00DFFC59 /* DownLoadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoadViewController.m; sourceTree = "<group>"; };
 		4E0EA9CF21CB4B1400DFFC59 /* ArchiveManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArchiveManager.h; sourceTree = "<group>"; };
 		4E0EA9D021CB4B1400DFFC59 /* ArchiveManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArchiveManager.m; sourceTree = "<group>"; };
 		4E2B608921D35F9C00930334 /* LogCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogCell.h; sourceTree = "<group>"; };
@@ -48,6 +44,10 @@
 		4E54339021D0FC8C00639E4F /* Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
 		4E54339121D0FC8C00639E4F /* Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
 		4E65D69421D228FA006B9B37 /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
+		4EC559AA21D4E18C00C33161 /* DownLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadViewController.h; sourceTree = "<group>"; };
+		4EC559AB21D4E18D00C33161 /* DownLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadViewController.m; sourceTree = "<group>"; };
+		4EC559AC21D4E18D00C33161 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		4EC559AD21D4E18D00C33161 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		776C165B62D00D16093D2604 /* Pods-BobbyenGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobbyenGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BobbyenGame/Pods-BobbyenGame.debug.xcconfig"; sourceTree = "<group>"; };
 		AA69CBD69AAB5E267C7E8E6F /* Pods-BobbyenGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BobbyenGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-BobbyenGame/Pods-BobbyenGame.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,10 +103,10 @@
 				4E0EA9C721CB38B700DFFC59 /* RootViewController.m */,
 				4E54338D21D0C32600639E4F /* GameViewController.h */,
 				4E54338E21D0C32600639E4F /* GameViewController.m */,
-				4E0EA9C921CB3B5D00DFFC59 /* DownLoadViewController.h */,
-				4E0EA9CA21CB3B5D00DFFC59 /* DownLoadViewController.m */,
-				4E07721221CCCA5E005796EE /* VideoViewController.h */,
-				4E07721321CCCA5E005796EE /* VideoViewController.m */,
+				4EC559AA21D4E18C00C33161 /* DownLoadViewController.h */,
+				4EC559AB21D4E18D00C33161 /* DownLoadViewController.m */,
+				4EC559AC21D4E18D00C33161 /* VideoViewController.h */,
+				4EC559AD21D4E18D00C33161 /* VideoViewController.m */,
 				4E2B608921D35F9C00930334 /* LogCell.h */,
 				4E2B608A21D35F9C00930334 /* LogCell.m */,
 				4E54339021D0FC8C00639E4F /* Tool.h */,
@@ -253,14 +253,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EC559AF21D4E18D00C33161 /* VideoViewController.m in Sources */,
 				4E0EA9BF21CB329400DFFC59 /* main.m in Sources */,
 				4E0EA9C821CB38B700DFFC59 /* RootViewController.m in Sources */,
 				4E2B608B21D35F9C00930334 /* LogCell.m in Sources */,
 				4E54338F21D0C32600639E4F /* GameViewController.m in Sources */,
+				4EC559AE21D4E18D00C33161 /* DownLoadViewController.m in Sources */,
 				4E2B608E21D36F1D00930334 /* MainNavigationController.m in Sources */,
-				4E07721421CCCA5E005796EE /* VideoViewController.m in Sources */,
 				4E0EA9D121CB4B1400DFFC59 /* ArchiveManager.m in Sources */,
-				4E0EA9CB21CB3B5D00DFFC59 /* DownLoadViewController.m in Sources */,
 				4E0EA9B121CB329300DFFC59 /* AppDelegate.m in Sources */,
 				4E54339221D0FC8C00639E4F /* Tool.m in Sources */,
 			);

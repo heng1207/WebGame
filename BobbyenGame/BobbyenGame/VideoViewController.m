@@ -70,6 +70,10 @@
 -(void)wmplayer:(WMPlayer *)wmplayer clickedCloseButton:(UIButton *)backBtn{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+//播放完毕的代理方法
+-(void)wmplayerFinishedPlay:(WMPlayer *)wmplayer{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 -(void)customPlayer{

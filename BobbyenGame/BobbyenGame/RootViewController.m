@@ -34,7 +34,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
-
+        
     }
     return _tableView;
 }
@@ -43,7 +43,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -60,12 +60,9 @@
         cell.textLabel.text = @"注册WebViewJavascriptBridge相关方法，使JS能够调用到;";
     }
     else if (indexPath.row==3){
-        cell.textLabel.text = @"删除指定文件夹(文件夹下所有文件)功能";
-    }
-    else if (indexPath.row==4){
         cell.textLabel.text = @"视频播放功能";
     }
-
+    
     return cell;
 }
 
@@ -81,12 +78,9 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.row==2) {
-
+        
     }
     else if (indexPath.row==3) {
-
-    }
-    else if (indexPath.row==4) {
         VideoViewController *vc=[[VideoViewController alloc]init];
         [self presentViewController:vc animated:YES completion:nil];
     }
@@ -110,13 +104,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
