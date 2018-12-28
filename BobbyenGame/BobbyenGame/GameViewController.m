@@ -8,33 +8,33 @@
 
 #import "GameViewController.h"
 #import "ArchiveManager.h"
-#import "LogCell.h"
+#import "CXHRecordTool.h"
+#import "lame.h"
 
-@interface GameViewController ()<WKUIDelegate,WKNavigationDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,WMPlayerDelegate>
+
+@interface GameViewController ()<WKUIDelegate,WKNavigationDelegate,WMPlayerDelegate>
 
 @property(nonatomic,strong) WKWebView *webview;
 @property(nonatomic,strong) WebViewJavascriptBridge* bridge;
-@property(nonatomic,strong) UITableView *logTableView;
+@property(nonatomic,strong) WVJBResponseCallback responseCallback;
 @property(nonatomic,strong) NSMutableArray *logDatas;
 @property(nonatomic,strong) WMPlayer  *wmPlayer;
-@property(nonatomic,strong) WVJBResponseCallback responseCallback;
+@property(nonatomic,strong) UITextView *titleTV;
 
-@property(nonatomic,strong)UITextView *titleTV;
+
 @end
 
 @implementation GameViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = YES;
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+
+    [self initWKWebview];
+    [self creatUIControl];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [UIApplication sharedApplication].statusBarHidden = NO;
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
     if (_bridge) {
         _bridge = nil;
     }
@@ -44,9 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    [self initWKWebview];
-    self.logDatas = [NSMutableArray arrayWithCapacity:100];
-    [self creatLogTabview];
+    self.logDatas = [NSMutableArray array];
     
     [self requestScriptResource];
     
@@ -66,17 +64,15 @@
     WKPreferences *preferences = [WKPreferences new];
     [preferences setValue:@(true) forKey:@"allowFileAccessFromFileURLs"];
     preferences.javaScriptCanOpenWindowsAutomatically = YES;
-    //preferences.minimumFontSize = 20.0;
     configuration.preferences = preferences;
     
     WKWebView *webView =[[WKWebView alloc]initWithFrame:[UIScreen mainScreen].bounds configuration:configuration];
     self.webview = webView;
     [self.view addSubview:webView];
+    webView.backgroundColor =[UIColor whiteColor];
     self.webview.UIDelegate = self;
     self.webview.navigationDelegate = self;
-    self.webview.transform = CGAffineTransformMakeRotation(M_PI_2);
     self.webview.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    webView.userInteractionEnabled = YES;
     [WebViewJavascriptBridge enableLogging];
     [_bridge setWebViewDelegate:self];
     _bridge = [WebViewJavascriptBridge bridgeForWebView:self.webview];
@@ -127,13 +123,13 @@
             [[ArchiveManager manager] unzipFile:dataDict[@"url"]];
 
         }
-        
+
         else if ([dataDict[@"methodName"] isEqualToString:@"removeDirectory"]){//删除
             NSString *path = [NSString stringWithFormat:@"%@/%@",[ArchiveManager manager].cachesPath,dataDict[@"url"]];
             NSError *error;
             [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
         }
-        
+
         else if ([dataDict[@"methodName"] isEqualToString:@"getResourcesPath"]){//资源路径
             NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
             returnDict[@"status"] = @"success";
@@ -141,12 +137,14 @@
             returnDict[@"resPath"] = [NSString stringWithFormat:@"file://%@/1",[ArchiveManager manager].cachesPath];
             responseCallback([Tool dictionaryToJson:returnDict]);
         }
-        
+
         else if ([dataDict[@"methodName"] isEqualToString:@"printLog"]){//Log日志输出
             NSLog(@"Log日志输出----%@",dataDict[@"logMsg"]);
+            if (weakSelf.logDatas.count>100) {
+                [weakSelf.logDatas removeAllObjects];
+            }
             [weakSelf.logDatas addObject:dataDict[@"logMsg"]];
-//            [weakSelf.logTableView reloadData];
-            
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSString *newStr =  [weakSelf.logDatas componentsJoinedByString:@"\n"];//#为分隔符
                 NSLog(@"-----%lu",(unsigned long)[newStr length]);
@@ -156,9 +154,9 @@
                 else{
                     weakSelf.titleTV.text = newStr;
                 }
-                
+
             });
-            
+
         }
 
         else if ([dataDict[@"methodName"] isEqualToString:@"getUserInfo"]){//获取用户信息
@@ -172,11 +170,12 @@
         }
 
         else if ([dataDict[@"methodName"] isEqualToString:@"exitMiniGame"]){//退出游戏
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }
-        
+
         else if ([dataDict[@"methodName"] isEqualToString:@"createVideo"]){//视频创建
             NSLog(@"%@",dataDict);
+            NSLog(@"%f---%f",SCREEN_WIDTH,SCREEN_HEIGHT);
             WMPlayerModel *model =[WMPlayerModel new];
             model.videoURL = [NSURL URLWithString:dataDict[@"url"]];
             WMPlayer *wmPlayer = [WMPlayer playerWithModel:model];
@@ -185,39 +184,128 @@
             weakSelf.wmPlayer = wmPlayer;
             [weakSelf.view addSubview:wmPlayer];
             wmPlayer.backBtnStyle = BackBtnStyleNone;
-            weakSelf.wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
-            weakSelf.wmPlayer.frame = CGRectMake([dataDict[@"y"] floatValue], [dataDict[@"x"] floatValue], [dataDict[@"height"] floatValue], [dataDict[@"width"] floatValue]);
-            
-            
+            weakSelf.wmPlayer.frame = CGRectMake([dataDict[@"x"] floatValue], [dataDict[@"y"] floatValue], [dataDict[@"width"] floatValue], [dataDict[@"height"] floatValue]);
+            [weakSelf.view insertSubview:weakSelf.wmPlayer belowSubview:weakSelf.titleTV];
+
             NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
             returnDict[@"status"] = @"success";
             returnDict[@"errorMsg"] = @"";
             returnDict[@"type"] = @"";
             responseCallback([Tool dictionaryToJson:returnDict]);
-            
+
         }
-        
+
         else if ([dataDict[@"methodName"] isEqualToString:@"playVideo"]){//视频播放
             [weakSelf.wmPlayer play];
-            
+
         }
-        
+
         else if ([dataDict[@"methodName"] isEqualToString:@"onEndedVideo"]){//移除视频控件
             [weakSelf.wmPlayer pause];
             [weakSelf.wmPlayer removeFromSuperview];
             weakSelf.wmPlayer = nil;
+
+        }
+        
+        else if ([dataDict[@"methodName"] isEqualToString:@"record"]){//录音
             
+            if ([dataDict[@"type"] isEqualToString:@"start"]) {//start:开始录音
+                [[CXHRecordTool sharedRecordTool] startRecording];
+                NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
+                returnDict[@"status"] = @"success";
+                returnDict[@"errorMsg"] = @"";
+                returnDict[@"type"] = @"start";
+                returnDict[@"url"] = @"";
+                responseCallback([Tool dictionaryToJson:returnDict]);
+            }
+            else{//stop:结束录音
+                [[CXHRecordTool sharedRecordTool]  stopRecording];
+                NSString *string = [CXHRecordTool sharedRecordTool].recorder.url.absoluteString;
+                NSString *urlString = [string substringFromIndex:7];
+                NSURL *fileUrl = [NSURL URLWithString:urlString];
+                NSURL *mp3Url = [weakSelf transformCAFToMP3:fileUrl];
+                [CXHRecordTool sharedRecordTool].recordMP3FileUrl = mp3Url;
+                NSLog(@"mp3文件地址：%@",mp3Url);
+
+                NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
+                returnDict[@"status"] = @"success";
+                returnDict[@"errorMsg"] = @"";
+                returnDict[@"type"] = @"stop";
+                NSURL *url = [CXHRecordTool sharedRecordTool].recordMP3FileUrl;
+                returnDict[@"url"] = url.absoluteString;
+                responseCallback([Tool dictionaryToJson:returnDict]);
+            }
         }
         
 
-       
+        else if ([dataDict[@"methodName"] isEqualToString:@"recognitionText"]){//上传录音
+            
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",@"image/jpeg",@"image/jpg",@"image/png",@"application/octet-stream",@"text/json",@"text/plain",nil];
+            manager.requestSerializer  = [AFJSONRequestSerializer serializer];
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            NSMutableDictionary *para = [NSMutableDictionary dictionary];
+            para[@"babyToken"] = @"GqPNvujTYTvX5xxfuS3tq1NF6wXSiTRY";
+            para[@"query"] = dataDict[@"text"];
+            NSString *url = @"https://api.bobbyen.com/v4/utility/recognitionText";
+            [manager POST:url parameters:para constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+
+                NSString *sre = [NSString stringWithFormat:@"file://%@",dataDict[@"url"]];
+
+                /*
+                 name 接口文档字段
+                 fileName 当前时间戳
+                 mimeType 告诉服务端，上传需支持的文件类型格式
+                 */
+
+                [formData appendPartWithFileURL:[NSURL URLWithString:sre] name:@"voice" fileName:@"1.mp3" mimeType:@"audio/mpeg3" error:nil];
+
+            } progress:^(NSProgress * _Nonnull uploadProgress) {
+
+                float progress = 1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
+                NSLog(@"上传进度-----   %f",progress);
+
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSLog(@"上传成功 %@",responseObject);
+                NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+                NSString *code =[NSString stringWithFormat:@"%@",obj[@"code"]];
+                if ([code isEqualToString:@"0"]) {
+                    NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
+                    returnDict[@"status"] = @"success";
+                    returnDict[@"errorMsg"] = @"";
+                    returnDict[@"data"] = [Tool dictionaryToJson:obj];
+                    responseCallback([Tool dictionaryToJson:returnDict]);
+                }
+                else {
+                    NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
+                    returnDict[@"status"] = @"fail";
+                    returnDict[@"errorMsg"] = @"";
+                    returnDict[@"data"] = [Tool dictionaryToJson:responseObject];
+                    responseCallback([Tool dictionaryToJson:returnDict]);
+
+                }
+
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"上传失败 %@",error);
+                NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];
+                returnDict[@"status"] = @"fail";
+                returnDict[@"errorMsg"] = @"网络出错了";
+                returnDict[@"data"] = @"网络出错了";
+                responseCallback([Tool dictionaryToJson:returnDict]);
+            }];
+            
+            
+        }
+
+
     }];
     
 }
 
 
 -(void)requestScriptResource{
-    NSString *scriptURL = @"https://bobbyenoss.oss-cn-beijing.aliyuncs.com/cocos/bobbyen_hzt_test/web-mobile.zip";
+//    NSString *scriptURL = @"https://bobbyenoss.oss-cn-beijing.aliyuncs.com/cocos/bobbyen_hzt_test/web-mobile.zip";
+    NSString *scriptURL = @"https://bobbyenoss.oss-cn-beijing.aliyuncs.com/cocos/xfj_test/web-mobile.zip";
     __weak GameViewController *weakSelf = self;
     [[ArchiveManager manager] setResourceBlock:^(NSString * _Nonnull localPath) {
         NSLog(@"资源路径一：%@",localPath);
@@ -246,15 +334,6 @@
 
     [[ArchiveManager manager] startRequestAndUnzip:URL];
 
-
-
-    UIButton *logBtn =[[UIButton alloc]init];
-    [self.view addSubview:logBtn];
-    [logBtn setTitle:@"log日志" forState:UIControlStateNormal];
-    [logBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [logBtn addTarget:self action:@selector(logClick:) forControlEvents:UIControlEventTouchUpInside];
-    logBtn.frame = CGRectMake(SCREEN_WIDTH-100, SCREEN_HEIGHT-50, 80, 30);
-
 }
 
 ////将文件copy到tmp目录
@@ -276,73 +355,40 @@
 //    return dstURL;
 //}
 
--(void)creatLogTabview{
-//    UITableView *logTableView =[[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
-//    self.logTableView = logTableView;
-//    [self.view addSubview:logTableView];
-//    logTableView.delegate = self;
-//    logTableView.dataSource = self;
-//    logTableView.transform = CGAffineTransformMakeRotation(M_PI_2);
-//    logTableView.frame = CGRectMake(0, SCREEN_HEIGHT*0.25, SCREEN_WIDTH, SCREEN_HEIGHT*0.75);
-//    logTableView.hidden = YES;
-//
-//    [logTableView registerClass:[LogCell class] forCellReuseIdentifier:@"LogCell"];
-//
-//    //点击手势
-//    UITapGestureRecognizer *logTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clearLogTapChange:)];
-//    logTap.delegate = self;
-//    [logTableView addGestureRecognizer:logTap];
-    
-    
+#pragma mark UI控件
+-(void)creatUIControl{
+
     UITextView *titleTV =[UITextView new];
     self.titleTV = titleTV;
-    titleTV.transform = CGAffineTransformMakeRotation(M_PI_2);
-    titleTV.frame = CGRectMake(0, SCREEN_HEIGHT*0.25, SCREEN_WIDTH, SCREEN_HEIGHT*0.75);
+    titleTV.frame = CGRectMake(SCREEN_WIDTH*0.25, 0, SCREEN_WIDTH*0.75, SCREEN_HEIGHT);
     [self.view addSubview:titleTV];
     titleTV.font = [UIFont systemFontOfSize:14];
     titleTV.textColor =[UIColor blueColor];
     titleTV.hidden = YES;
+    [titleTV setEditable:NO];
 
-}
-#pragma mark TableViewDelegate && TableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.logDatas.count;
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  1;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    LogCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LogCell" forIndexPath:indexPath];
-    NSString *str = self.logDatas[indexPath.section];
-    NSLog(@"%lu",(unsigned long)[str length]);
-    cell.titleLab.text = str;
-//    [str substringToIndex:1000];
-    return cell;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewAutomaticDimension;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
-}
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
-    view.backgroundColor =[UIColor grayColor];
-    return view;
-}
-#pragma mark UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+    
+    UIButton *logBtn =[[UIButton alloc]init];
+    [self.view addSubview:logBtn];
+    [logBtn setTitle:@"log日志" forState:UIControlStateNormal];
+    [logBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [logBtn addTarget:self action:@selector(logClick:) forControlEvents:UIControlEventTouchUpInside];
+    logBtn.frame = CGRectMake(SCREEN_WIDTH-100, 20, 80, 30);
+
+
+    UIButton *clearBtn =[[UIButton alloc]init];
+    [self.view addSubview:clearBtn];
+    [clearBtn setTitle:@"删除日志" forState:UIControlStateNormal];
+    [clearBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [clearBtn addTarget:self action:@selector(clearClick) forControlEvents:UIControlEventTouchUpInside];
+    clearBtn.frame = CGRectMake(SCREEN_WIDTH-100, 70, 80, 30);
 }
 -(void)logClick:(UIButton*)btn{
-//    self.logTableView.hidden = !self.logTableView.hidden;
-    
     self.titleTV.hidden = !self.titleTV.hidden;
-
 }
--(void)clearLogTapChange:(UIRotationGestureRecognizer *)sender{
+-(void)clearClick{
     [self.logDatas removeAllObjects];
-    [self.logTableView reloadData];
+    self.titleTV.text = @"";
 }
 
 
@@ -381,6 +427,99 @@
     
 }
 
+#pragma  .caf --> .mp3
+- (NSURL *)transformCAFToMP3:(NSURL *)sourceUrl
+{
+    NSURL *mp3FilePath,*audioFileSavePath;
+    
+    
+    //    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间0秒后的时间
+    //    NSTimeInterval time=[date timeIntervalSince1970]*1000;// *1000 是精确到毫秒，不乘就是精确到秒
+    //    NSString *timeString = [NSString stringWithFormat:@"%.0f",time];
+    //    //获取沙盒地址
+    //    NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    //
+    //    NSString *folderPath = [NSString stringWithFormat:@"%@/1/%@",path,timeString];
+    //    [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
+    //
+    //    NSString *newsPath = [path stringByAppendingString:@"/1"];
+    //    NSString *newsPath1 = [newsPath stringByAppendingPathComponent:timeString];
+    //    NSString *newsPath2 = [newsPath1 stringByAppendingPathComponent:@"BobbyenVideo.mp3"];
+    //    mp3FilePath = [NSURL URLWithString:newsPath2];
+    
+    
+    
+    
+    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间0秒后的时间
+    NSTimeInterval time=[date timeIntervalSince1970]*1000;// *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *timeString = [NSString stringWithFormat:@"%.0f.mp3",time];
+    //获取沙盒地址
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *newsPath = [path stringByAppendingString:@"/1"];
+    NSString *newsPath1 = [newsPath stringByAppendingPathComponent:timeString];
+    mp3FilePath = [NSURL URLWithString:newsPath1];
+    
+    
+    @try {
+        int read, write;
+        
+        FILE *pcm = fopen([[sourceUrl absoluteString] cStringUsingEncoding:1], "rb");   //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                                   //skip file header
+        FILE *mp3 = fopen([[mp3FilePath absoluteString] cStringUsingEncoding:1], "wb"); //output 输出生成的Mp3文件位置
+        
+        //        NSLog(@"sour-- %@   last-- %@",sourceUrl,mp3FilePath);
+        //        sour-- //Users/chenxihang/Library/Developer/CoreSimulator/Devices/35F46DFB-3878-44EE-BBC4-B4EEB494548A/data/Containers/Data/App ... cord.caf
+        //        last-- /Users/chenxihang/Library/Developer/CoreSimulator/Devices/35F46DFB-3878-44EE-BBC4-B4EEB494548A/data/Containers/Data/Appl ... test.mp3
+        
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_in_samplerate(lame, 11025.0);
+        lame_set_VBR(lame, vbr_default);
+        lame_init_params(lame);
+        
+        do {
+            read = (int)fread(pcm_buffer, 2 * sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",[exception description]);
+    }
+    @finally {
+        audioFileSavePath = mp3FilePath;
+        NSLog(@"MP3生成成功: %@",audioFileSavePath);
+    }
+    
+    return audioFileSavePath;
+}
+
+
+//支持旋转
+-(BOOL)shouldAutorotate{
+    return YES;
+}
+//支持的方向,只支持横屏
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeRight;
+}
+//一开始的方向  很重要
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationLandscapeRight;
+}
 
 -(void)dealloc{
     NSLog(@"页面释放了---%@",self);

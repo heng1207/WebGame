@@ -1,8 +1,8 @@
 //
-//  LogCell.h
+//  RecordViewController.h
 //  BobbyenGame
 //
-//  Created by iOS-Mac on 2018/12/26.
+//  Created by iOS-Mac on 2018/12/28.
 //  Copyright © 2018年 iOS-Mac. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LogCell : UITableViewCell
-@property(nonatomic,strong)UILabel *titleLab;
+@interface RecordViewController : UINavigationController
 
 @end
 

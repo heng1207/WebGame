@@ -10,6 +10,9 @@
 #import "GameViewController.h"
 #import "DownLoadViewController.h"
 #import "VideoViewController.h"
+#import "RecordViewController.h"
+#import "CXHRecordTool.h"
+
 
 @interface RootViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -24,7 +27,8 @@
     self.title = @"波比游戏";
     [self.view addSubview:self.tableView];
     
-    
+//    [[CXHRecordTool sharedRecordTool] startRecording];
+//    [[CXHRecordTool sharedRecordTool] stopRecording];
     
     // Do any additional setup after loading the view.
 }
@@ -43,7 +47,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -62,7 +66,9 @@
     else if (indexPath.row==3){
         cell.textLabel.text = @"视频播放功能";
     }
-    
+    else if (indexPath.row==4){
+        cell.textLabel.text = @"录音功能";
+    }
     return cell;
 }
 
@@ -71,7 +77,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.row==0) {
         GameViewController*vc=[GameViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self presentViewController:vc animated:YES completion:nil];
     }
     else if (indexPath.row==1) {
         DownLoadViewController *vc=[DownLoadViewController new];
@@ -84,7 +90,10 @@
         VideoViewController *vc=[[VideoViewController alloc]init];
         [self presentViewController:vc animated:YES completion:nil];
     }
-    
+    else if (indexPath.row==4) {
+        RecordViewController *vc=[[RecordViewController alloc]init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
