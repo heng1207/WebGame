@@ -14,9 +14,10 @@
 #import "SSZipArchive.h"
 #import "Masonry.h"
 #import "WMPlayer.h"
+#import "DeviceUtil.h"
 #import "CLPlayerView.h"
 #import "Tool.h"
-//#import <HTTPServer.h>
+
 
 
 #define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width

@@ -81,8 +81,27 @@
     [_bridge registerHandler:@"callbackByJSHandler" handler:^(id data, WVJBResponseCallback responseCallback) {
         weakSelf.responseCallback = responseCallback;
         NSDictionary *dataDict = [Tool dictionaryWithJsonString:[NSString stringWithFormat:@"%@",data]];
-
-        if ([dataDict[@"methodName"] isEqualToString:@"downloadResource"]) {//下载
+        
+        if ([dataDict[@"methodName"] isEqualToString:@"getSystemInfo"]) {//获取设备信息
+            DeviceUtil *deviceUtil = [[DeviceUtil alloc] init];
+            NSString *device = [deviceUtil hardwareString];
+            device = [device substringToIndex:6];
+            NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+            NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
+            returnDict[@"status"] = @"success";
+            returnDict[@"systemVersion"] = [NSString stringWithFormat:@"ios %@",phoneVersion];
+            returnDict[@"frameWidth"] = [NSString stringWithFormat:@"%f",SCREEN_WIDTH];
+            returnDict[@"frameHeight"] = [NSString stringWithFormat:@"%f",SCREEN_HEIGHT];
+            if ([device isEqualToString:@"iPhone"]) {
+                returnDict[@"isPad"] = @"0";
+            }
+            else{
+                returnDict[@"isPad"] = @"1";
+            }
+            responseCallback([Tool dictionaryToJson:returnDict]);
+            
+        }
+        else if ([dataDict[@"methodName"] isEqualToString:@"downloadResource"]) {//下载
             [[ArchiveManager manager] setResourceBlock:^(NSString * _Nonnull localPath) {
                 NSLog(@"资源路径：%@",localPath);
                 NSMutableDictionary *returnDict =[NSMutableDictionary dictionary];

@@ -6,7 +6,9 @@ use_frameworks!
 pod 'AFNetworking'
 pod 'WebViewJavascriptBridge'
 pod 'SSZipArchive'
-pod 'WMPlayer' 
+pod 'WMPlayer'
+
+
 pod 'SDWebImage'
 pod 'Masonry'
 pod 'CLPlayer'

@@ -26,7 +26,7 @@
     self.view.backgroundColor =[UIColor whiteColor];
     self.title = @"波比游戏";
     [self.view addSubview:self.tableView];
-    
+  
 //    [[CXHRecordTool sharedRecordTool] startRecording];
 //    [[CXHRecordTool sharedRecordTool] stopRecording];
     
